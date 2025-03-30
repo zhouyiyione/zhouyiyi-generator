@@ -1,18 +1,11 @@
-package org.zhouyiyi.generator;
+package com.zhouyiyi.generator;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.zhouyiyi.model.MainTemplateConfig;
+import com.zhouyiyi.model.MainTemplateConfig;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
 
 public class DynamicGenerator {
     public static void main(String[] args) throws IOException, TemplateException {
@@ -63,18 +56,14 @@ public class DynamicGenerator {
         String templateName = new File(inputPath).getName();
         Template template = configuration.getTemplate(templateName);
 
-        // 创建数据模型
-        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-        mainTemplateConfig.setAuthor("yupi");
-        mainTemplateConfig.setLoop(false);
-        mainTemplateConfig.setOutput("求和结果：");
-
         // 生成
-        Writer out = new FileWriter(outputPath);
-        template.process(model, out);
-
-        // 生成文件后别忘了关闭哦
-        out.close();
+        // 使用 OutputStreamWriter 并指定 UTF-8 编码
+        try (Writer out = new OutputStreamWriter(new FileOutputStream(outputPath), "UTF-8")) {
+            // 处理模板
+            template.process(model, out);
+        } catch (IOException | TemplateException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package org.zhouyiyi.generator;
+package com.zhouyiyi.generator;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;

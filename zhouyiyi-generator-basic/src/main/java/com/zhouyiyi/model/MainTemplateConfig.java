@@ -1,4 +1,4 @@
-package org.zhouyiyi.model;
+package com.zhouyiyi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
